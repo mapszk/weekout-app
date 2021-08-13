@@ -4,6 +4,7 @@ import theme from "../../theme/theme"
 import StyledText from "./StyledText"
 
 interface Props {
+  onPress?: () => void
   style?: any
   full?: boolean
   mb?: number
@@ -15,6 +16,10 @@ interface Props {
   secondary?: boolean
 }
 const Button: React.FC<Props> = ({
+  onPress,
+  mb,
+  mt,
+  my,
   style,
   full,
   ghostPrimary,
@@ -30,10 +35,11 @@ const Button: React.FC<Props> = ({
     secondary && customStyles.secondary,
     ghostPrimary && customStyles.ghostPrimary,
     ghostSecondary && customStyles.ghostSecondary,
+    { marginBottom: mb, marginTop: mt, marginVertical: my },
     style,
   ]
   return (
-    <TouchableOpacity style={styles}>
+    <TouchableOpacity style={styles} onPress={onPress}>
       <StyledText
         buttonGhostPrimary={ghostPrimary}
         buttonGhostSecondary={ghostSecondary}

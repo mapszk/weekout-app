@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import React from "react"
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, Text } from "react-native"
 import {
   Poppins_200ExtraLight,
   Poppins_400Regular,
@@ -10,6 +10,7 @@ import {
 } from "@expo-google-fonts/poppins"
 import { useFonts } from "expo-font"
 import theme from "../../theme/theme"
+import AppLoading from "expo-app-loading"
 
 interface Props {
   style?: any
@@ -76,7 +77,7 @@ const StyledText: React.FC<Props> = ({
     bold && customStyle.bold,
     style,
   ]
-  if (!fontsLoaded) return <View></View>
+  if (!fontsLoaded) return <AppLoading />
   else
     return (
       <Text style={textStyles} {...restofProps}>
