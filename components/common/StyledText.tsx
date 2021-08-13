@@ -13,6 +13,10 @@ import theme from "../../theme/theme"
 
 interface Props {
   style?: any
+  center?: boolean
+  button?: boolean
+  buttonGhostPrimary?: boolean
+  buttonGhostSecondary?: boolean
   heading?: boolean
   subheading?: boolean
   text?: boolean
@@ -27,6 +31,10 @@ interface Props {
 }
 
 const StyledText: React.FC<Props> = ({
+  center,
+  button,
+  buttonGhostPrimary,
+  buttonGhostSecondary,
   heading,
   subheading,
   text,
@@ -51,6 +59,10 @@ const StyledText: React.FC<Props> = ({
   })
   const textStyles = [
     customStyle.default,
+    button && customStyle.button,
+    buttonGhostPrimary && customStyle.buttonGhostPrimary,
+    buttonGhostSecondary && customStyle.buttonGhostSecondary,
+    center && customStyle.center,
     heading && customStyle.heading,
     subheading && customStyle.subheading,
     text && customStyle.text,
@@ -77,7 +89,25 @@ const customStyle = StyleSheet.create({
   default: {
     fontSize: 16,
     color: "#3d3d3d",
-    fontWeight: "500",
+    fontFamily: "Poppins_400Regular",
+  },
+  button: {
+    fontFamily: "Poppins_600SemiBold",
+    color: "white",
+    textAlign: "center",
+  },
+  buttonGhostPrimary: {
+    fontFamily: "Poppins_600SemiBold",
+    color: theme.colors.primary[500],
+    textAlign: "center",
+  },
+  buttonGhostSecondary: {
+    fontFamily: "Poppins_600SemiBold",
+    color: theme.colors.secondary[500],
+    textAlign: "center",
+  },
+  center: {
+    textAlign: "center",
   },
   heading: {
     fontSize: 32,
