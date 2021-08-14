@@ -1,30 +1,34 @@
 import React from "react"
 import { StyleSheet, View } from "react-native"
-import { useHistory } from "react-router-native"
+import { Redirect, useHistory } from "react-router-native"
 import Button from "../components/common/Button"
 import Logo from "../components/common/Logo"
 import StyledText from "../components/common/StyledText"
+import { useAuthContext } from "../hooks/useAuthContext"
 
 const Welcome: React.FC = () => {
   const history = useHistory()
-  return (
-    <View style={styles.container}>
-      <View style={styles.logo}>
-        <Logo />
+  const { user } = useAuthContext()
+  if (user) return <Redirect to="/" />
+  else
+    return (
+      <View style={styles.container}>
+        <View style={styles.logo}>
+          <Logo />
+        </View>
+        <StyledText third semibold style={styles.desc} center>
+          Welcome the Weekout, the best app for your week training
+        </StyledText>
+        <View style={styles.buttonContainer}>
+          <Button onPress={() => history.push("/login")} primary mb={6}>
+            Log in
+          </Button>
+          <Button onPress={() => history.push("/register")} ghostPrimary>
+            Register
+          </Button>
+        </View>
       </View>
-      <StyledText third semibold style={styles.desc} center>
-        Welcome the Weekout, the best app for your week training
-      </StyledText>
-      <View style={styles.buttonContainer}>
-        <Button onPress={() => history.push("/login")} primary mb={6}>
-          Log in
-        </Button>
-        <Button onPress={() => history.push("/register")} ghostPrimary>
-          Register
-        </Button>
-      </View>
-    </View>
-  )
+    )
 }
 
 const styles = StyleSheet.create({

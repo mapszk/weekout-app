@@ -3,6 +3,7 @@ import { BackHandler } from "react-native"
 import { Route, Switch, useHistory } from "react-router-native"
 import Day from "./Day"
 import DayEdit from "./DayEdit"
+import Index from "./Index"
 import Login from "./Login"
 import Register from "./Register"
 import Welcome from "./Welcome"
@@ -20,7 +21,7 @@ const Main: React.FC = () => {
   }, [])
   return (
     <Switch>
-      <Route exact path="/" component={Welcome} />
+      <Route exact path="/" component={Index} />
       <Route path="/welcome" component={Welcome} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />

@@ -1,5 +1,5 @@
 import { firebaseAuth } from "../../../firebase/firebase"
-import { Alert } from "./alertType"
+import { Alert } from "../../../types/AlertType"
 
 export const logInWithEmail = async (
   email: string,

@@ -1,16 +1,6 @@
-/* eslint-disable camelcase */
 import React from "react"
 import { StyleSheet, Text } from "react-native"
-import {
-  Poppins_200ExtraLight,
-  Poppins_400Regular,
-  Poppins_500Medium,
-  Poppins_600SemiBold,
-  Poppins_700Bold,
-} from "@expo-google-fonts/poppins"
-import { useFonts } from "expo-font"
 import theme from "../../theme/theme"
-import AppLoading from "expo-app-loading"
 
 interface Props {
   style?: any
@@ -51,13 +41,6 @@ const StyledText: React.FC<Props> = ({
   children,
   ...restofProps
 }) => {
-  const [fontsLoaded] = useFonts({
-    Poppins_200ExtraLight,
-    Poppins_400Regular,
-    Poppins_500Medium,
-    Poppins_600SemiBold,
-    Poppins_700Bold,
-  })
   const textStyles = [
     customStyle.default,
     button && customStyle.button,
@@ -77,13 +60,11 @@ const StyledText: React.FC<Props> = ({
     bold && customStyle.bold,
     style,
   ]
-  if (!fontsLoaded) return <AppLoading />
-  else
-    return (
-      <Text style={textStyles} {...restofProps}>
-        {children}
-      </Text>
-    )
+  return (
+    <Text style={textStyles} {...restofProps}>
+      {children}
+    </Text>
+  )
 }
 
 const customStyle = StyleSheet.create({
