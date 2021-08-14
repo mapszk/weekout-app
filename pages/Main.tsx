@@ -11,7 +11,7 @@ const Main: React.FC = () => {
   const history = useHistory()
   useEffect(() => {
     const handleBack = () => {
-      history.go(-1)
+      history.goBack()
       return true
     }
     BackHandler.addEventListener("hardwareBackPress", handleBack)

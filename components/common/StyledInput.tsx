@@ -4,6 +4,9 @@ import theme from "../../theme/theme"
 import StyledText from "./StyledText"
 
 interface Props {
+  onChangeText?: (value: string) => void
+  value?: string
+  placeholder?: string
   label?: string
   password?: boolean
   style?: any
@@ -12,6 +15,9 @@ interface Props {
   my?: number
 }
 const StyledInput: React.FC<Props> = ({
+  onChangeText,
+  value,
+  placeholder,
   label,
   password,
   style,
@@ -36,6 +42,9 @@ const StyledInput: React.FC<Props> = ({
       <View>
         <StyledText>{label}</StyledText>
         <TextInput
+          onChangeText={onChangeText}
+          value={value}
+          placeholder={placeholder}
           secureTextEntry={password}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
@@ -46,6 +55,9 @@ const StyledInput: React.FC<Props> = ({
   } else
     return (
       <TextInput
+        onChangeText={onChangeText}
+        value={value}
+        placeholder={placeholder}
         secureTextEntry={password}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}

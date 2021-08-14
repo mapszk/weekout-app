@@ -1,10 +1,12 @@
 import React from "react"
-import { StyleSheet, TouchableOpacity } from "react-native"
+import { ActivityIndicator, StyleSheet, TouchableOpacity } from "react-native"
 import theme from "../../theme/theme"
 import StyledText from "./StyledText"
 
 interface Props {
   onPress?: () => void
+  isLoading?: boolean
+  disabled?: boolean
   style?: any
   full?: boolean
   mb?: number
@@ -17,6 +19,8 @@ interface Props {
 }
 const Button: React.FC<Props> = ({
   onPress,
+  isLoading,
+  disabled,
   mb,
   mt,
   my,
@@ -39,13 +43,29 @@ const Button: React.FC<Props> = ({
     style,
   ]
   return (
-    <TouchableOpacity style={styles} onPress={onPress}>
+    <TouchableOpacity
+      disabled={disabled || isLoading}
+      style={styles}
+      onPress={onPress}
+    >
       <StyledText
         buttonGhostPrimary={ghostPrimary}
         buttonGhostSecondary={ghostSecondary}
         button
       >
-        {children}
+        {isLoading ? (
+          <ActivityIndicator
+            color={
+              ghostPrimary
+                ? theme.colors.primary[500]
+                : ghostSecondary
+                ? theme.colors.secondary[500]
+                : "white"
+            }
+          />
+        ) : (
+          children
+        )}
       </StyledText>
     </TouchableOpacity>
   )
