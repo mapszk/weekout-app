@@ -4,12 +4,17 @@ import { StyleSheet, TouchableOpacity, View } from "react-native"
 import StyledText from "../../common/StyledText"
 
 interface Props {
+  style?: any
   activeVolume: string
   setActiveVolume: (value: string) => void
 }
-const VolumePicker: React.FC<Props> = ({ activeVolume, setActiveVolume }) => {
+const VolumePicker: React.FC<Props> = ({
+  style,
+  activeVolume,
+  setActiveVolume,
+}) => {
   return (
-    <View>
+    <View style={style}>
       <StyledText semibold third>
         Training volume:
       </StyledText>
@@ -90,7 +95,6 @@ const styles = StyleSheet.create({
   },
   tagContainer: {
     flexDirection: "row",
-    marginBottom: 15,
   },
   tags: {
     marginRight: 6,

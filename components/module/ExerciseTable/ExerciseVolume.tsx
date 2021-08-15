@@ -1,4 +1,5 @@
 import React from "react"
+
 import { FlatList, View } from "react-native"
 import theme from "../../../theme/theme"
 import { Exercise } from "../../../types/Exercise"
@@ -27,7 +28,13 @@ const sameMuscle = (
 
 const EmptyList: React.FC = () => {
   return (
-    <View style={{ paddingVertical: 50 }}>
+    <View
+      style={{
+        paddingTop: 150,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <StyledText center>There are no exercises for this volume</StyledText>
     </View>
   )
@@ -52,7 +59,9 @@ const ExerciseTableRow: React.FC<ExerciseRowProps> = ({ exercise }) => {
 const ExerciseVolume: React.FC<Props> = ({ volume }) => {
   return (
     <FlatList
+      style={{ flex: 1, paddingRight: 10 }}
       data={volume}
+      ListEmptyComponent={EmptyList}
       renderItem={({ item, index }) => (
         <>
           {!sameMuscle(volume, item, index) && (
@@ -72,7 +81,6 @@ const ExerciseVolume: React.FC<Props> = ({ volume }) => {
           <ExerciseTableRow key={item.id} exercise={item} />
         </>
       )}
-      ListEmptyComponent={EmptyList}
     />
   )
 }

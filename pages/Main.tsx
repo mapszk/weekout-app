@@ -1,6 +1,6 @@
-import React, { useEffect } from "react"
-import { BackHandler } from "react-native"
-import { Route, Switch, useHistory } from "react-router-native"
+import React from "react"
+import { View } from "react-native"
+import { Route, Switch } from "react-router-native"
 import Day from "./Day"
 import DayEdit from "./DayEdit"
 import Index from "./Index"
@@ -9,25 +9,17 @@ import Register from "./Register"
 import Welcome from "./Welcome"
 
 const Main: React.FC = () => {
-  const history = useHistory()
-  useEffect(() => {
-    const handleBack = () => {
-      history.goBack()
-      return true
-    }
-    BackHandler.addEventListener("hardwareBackPress", handleBack)
-    return () =>
-      BackHandler.removeEventListener("hardwareBackPress", handleBack)
-  }, [])
   return (
-    <Switch>
-      <Route exact path="/" component={Index} />
-      <Route path="/welcome" component={Welcome} />
-      <Route path="/login" component={Login} />
-      <Route path="/register" component={Register} />
-      <Route path="/day/:day" component={Day} />
-      <Route path="/day/:day/edit" component={DayEdit} />
-    </Switch>
+    <View style={{ height: "100%" }}>
+      <Switch>
+        <Route exact path="/" component={Index} />
+        <Route path="/welcome" component={Welcome} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <Route path="/day/:day" component={Day} />
+        <Route path="/day/:day/edit" component={DayEdit} />
+      </Switch>
+    </View>
   )
 }
 
