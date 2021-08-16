@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { View } from "react-native"
+import { StyleSheet, View } from "react-native"
 import { useParams } from "react-router-native"
 import VolumePicker from "../components/module/VolumePicker/VolumePicker"
 import { useAuthContext } from "../hooks/useAuthContext"
@@ -15,7 +15,7 @@ interface ParamsTypes {
   day: string
 }
 
-const Day = () => {
+const Day: React.FC = () => {
   const [activeVolume, setActiveVolume] = useState("NONE")
   const { day } = useParams<ParamsTypes>()
   const { user } = useAuthContext()
@@ -23,12 +23,7 @@ const Day = () => {
   if (loading) return <Loading />
   else
     return (
-      <View
-        style={{
-          paddingTop: Constants.statusBarHeight,
-          height: "100%",
-        }}
-      >
+      <View style={customStyles.container}>
         <DayHeader day={day} style={{ flex: 1 }} />
         <VolumePicker
           activeVolume={activeVolume}
@@ -45,5 +40,12 @@ const Day = () => {
       </View>
     )
 }
+
+const customStyles = StyleSheet.create({
+  container: {
+    paddingTop: Constants.statusBarHeight,
+    flex: 1,
+  },
+})
 
 export default Day

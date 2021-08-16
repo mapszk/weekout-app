@@ -11,6 +11,7 @@ interface Props {
   heading?: boolean
   subheading?: boolean
   text?: boolean
+  white?: boolean
   primary?: boolean
   secondary?: boolean
   third?: boolean
@@ -24,6 +25,7 @@ interface Props {
 const StyledText: React.FC<Props> = ({
   center,
   button,
+  white,
   buttonGhostPrimary,
   buttonGhostSecondary,
   heading,
@@ -58,6 +60,7 @@ const StyledText: React.FC<Props> = ({
     medium && customStyle.medium,
     semibold && customStyle.semibold,
     bold && customStyle.bold,
+    white && customStyle.white,
     style,
   ]
   return (
@@ -72,6 +75,9 @@ const customStyle = StyleSheet.create({
     fontSize: 16,
     color: "#3d3d3d",
     fontFamily: "Poppins_400Regular",
+  },
+  white: {
+    color: "white",
   },
   button: {
     fontFamily: "Poppins_600SemiBold",

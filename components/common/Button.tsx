@@ -5,6 +5,7 @@ import StyledText from "./StyledText"
 
 interface Props {
   onPress?: () => void
+  icon?: boolean
   isLoading?: boolean
   disabled?: boolean
   style?: any
@@ -19,6 +20,7 @@ interface Props {
 }
 const Button: React.FC<Props> = ({
   onPress,
+  icon,
   isLoading,
   disabled,
   mb,
@@ -39,6 +41,7 @@ const Button: React.FC<Props> = ({
     secondary && customStyles.secondary,
     ghostPrimary && customStyles.ghostPrimary,
     ghostSecondary && customStyles.ghostSecondary,
+    icon && customStyles.icon,
     { marginBottom: mb, marginTop: mt, marginVertical: my },
     style,
   ]
@@ -78,6 +81,9 @@ const customStyles = StyleSheet.create({
     height: 40,
     borderRadius: 6,
     backgroundColor: theme.colors.primary[500],
+  },
+  icon: {
+    backgroundColor: "transparent",
   },
   full: {
     width: "100%",

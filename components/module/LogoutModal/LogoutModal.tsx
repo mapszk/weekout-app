@@ -1,6 +1,5 @@
 import React, { useState } from "react"
-
-import { Modal, View } from "react-native"
+import { Modal, StyleSheet, View } from "react-native"
 import Toast from "react-native-root-toast"
 import { useHistory } from "react-router-native"
 import { firebaseAuth } from "../../../firebase/firebase"
@@ -36,32 +35,10 @@ const LogoutModal: React.FC<Props> = ({ visible, setVisible }) => {
   }
   return (
     <Modal transparent={true} animationType="fade" visible={visible}>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-        }}
-      >
-        <View
-          style={{
-            padding: 20,
-            borderRadius: 10,
-            backgroundColor: "white",
-            shadowColor: "#000",
-            shadowOffset: { width: 0, height: 25 },
-            shadowOpacity: 0.25,
-            elevation: 15,
-            marginHorizontal: 20,
-          }}
-        >
+      <View style={customStyles.centeredView}>
+        <View style={customStyles.modal}>
           <StyledText center>Are you sure you want to log out?</StyledText>
-          <View
-            style={{
-              flexDirection: "row",
-              marginTop: 15,
-              paddingHorizontal: 20,
-            }}
-          >
+          <View style={customStyles.buttonContainer}>
             <Button
               isLoading={isSubmitting}
               style={{ flex: 1, marginRight: 5 }}
@@ -84,5 +61,27 @@ const LogoutModal: React.FC<Props> = ({ visible, setVisible }) => {
     </Modal>
   )
 }
+
+const customStyles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  modal: {
+    padding: 20,
+    borderRadius: 10,
+    backgroundColor: "white",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 25 },
+    shadowOpacity: 0.25,
+    elevation: 15,
+    marginHorizontal: 20,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    marginTop: 15,
+    paddingHorizontal: 20,
+  },
+})
 
 export default LogoutModal

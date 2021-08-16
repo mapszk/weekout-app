@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-
 import { StyleSheet, TouchableOpacity, View } from "react-native"
 import Toast from "react-native-root-toast"
 import { useHistory } from "react-router-native"

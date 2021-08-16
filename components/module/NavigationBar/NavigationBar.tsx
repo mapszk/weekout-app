@@ -1,45 +1,58 @@
 import React, { useState } from "react"
-import { View } from "react-native"
-import { useLocation } from "react-router-native"
+import { StyleSheet, View } from "react-native"
 import { MaterialIcons } from "@expo/vector-icons"
 import theme from "../../../theme/theme"
 import LogoutModal from "../LogoutModal/LogoutModal"
+import Button from "../../common/Button"
+import Timer from "../Timer/Timer"
 
 interface Props {
   style?: any
 }
 
 const NavigationBar: React.FC<Props> = ({ style }) => {
+  const [timerVisible, setTimerVisible] = useState<boolean>(false)
   const [modalVisible, setModalVisible] = useState<boolean>(false)
-  const { pathname } = useLocation()
   return (
-    <View
-      style={[
-        {
-          height: 40,
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          paddingHorizontal: 35,
-        },
-        style,
-      ]}
-    >
-      <LogoutModal setVisible={setModalVisible} visible={modalVisible} />
-      <MaterialIcons
-        name="logout"
-        size={30}
-        color={theme.colors.primary[500]}
-        onPress={() => setModalVisible(true)}
-      />
-      <MaterialIcons name="timer" size={30} color={theme.colors.primary[500]} />
-      <MaterialIcons
-        name={pathname.includes("edit") ? "edit-off" : "edit"}
-        size={30}
-        color={theme.colors.primary[500]}
-      />
-    </View>
+    <>
+      <View style={[customStyles.navigation, style]}>
+        <LogoutModal setVisible={setModalVisible} visible={modalVisible} />
+        <Button icon onPress={() => setModalVisible(true)}>
+          <MaterialIcons
+            name="logout"
+            size={30}
+            color={theme.colors.primary[500]}
+          />
+        </Button>
+        <Button icon onPress={() => setTimerVisible(!timerVisible)}>
+          <MaterialIcons
+            name="timer"
+            size={30}
+            color={theme.colors.primary[500]}
+          />
+        </Button>
+        <Button icon>
+          <MaterialIcons
+            name="edit"
+            size={30}
+            color={theme.colors.primary[500]}
+          />
+        </Button>
+      </View>
+      <Timer visible={timerVisible} />
+    </>
   )
 }
+
+const customStyles = StyleSheet.create({
+  navigation: {
+    backgroundColor: "white",
+    height: 40,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 35,
+  },
+})
 
 export default NavigationBar
