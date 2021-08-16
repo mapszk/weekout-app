@@ -26,7 +26,7 @@ const Index = () => {
   }
   const { user } = useAuthContext()
   if (!user) return <Redirect to="/welcome" />
-  else return <Redirect to={`/day/saturday`} />
+  else return <Redirect to={`/day/${getDestination()}`} />
 }
 
 export default Index

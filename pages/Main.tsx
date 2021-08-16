@@ -17,7 +17,7 @@ const Main: React.FC = () => {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/day/:day" component={Day} />
-        <Route path="/day/:day/edit" component={DayEdit} />
+        <Route path="/edit/:day" component={DayEdit} />
       </Switch>
     </View>
   )

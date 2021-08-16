@@ -51,25 +51,29 @@ const Button: React.FC<Props> = ({
       style={styles}
       onPress={onPress}
     >
-      <StyledText
-        buttonGhostPrimary={ghostPrimary}
-        buttonGhostSecondary={ghostSecondary}
-        button
-      >
-        {isLoading ? (
-          <ActivityIndicator
-            color={
-              ghostPrimary
-                ? theme.colors.primary[500]
-                : ghostSecondary
-                ? theme.colors.secondary[500]
-                : "white"
-            }
-          />
-        ) : (
-          children
-        )}
-      </StyledText>
+      {icon ? (
+        children
+      ) : (
+        <StyledText
+          buttonGhostPrimary={ghostPrimary}
+          buttonGhostSecondary={ghostSecondary}
+          button
+        >
+          {isLoading ? (
+            <ActivityIndicator
+              color={
+                ghostPrimary
+                  ? theme.colors.primary[500]
+                  : ghostSecondary
+                  ? theme.colors.secondary[500]
+                  : "white"
+              }
+            />
+          ) : (
+            children
+          )}
+        </StyledText>
+      )}
     </TouchableOpacity>
   )
 }
@@ -84,6 +88,9 @@ const customStyles = StyleSheet.create({
   },
   icon: {
     backgroundColor: "transparent",
+    padding: 0,
+    height: "auto",
+    width: "auto",
   },
   full: {
     width: "100%",

@@ -8,13 +8,13 @@ export const useGetDay = (uid: string, day: string) => {
   const [loading, setLoading] = useState<boolean>(true)
   useEffect(() => {
     const getData = async () => {
+      setLoading(true)
       await firebaseDb
         .collection("users")
         .doc(uid)
         .get()
         .then((doc) => {
           const days = doc.data() as DaysData
-          console.log(doc.data())
           const dayData: DayData = days[day]
           setData(dayData)
         })
@@ -22,6 +22,6 @@ export const useGetDay = (uid: string, day: string) => {
         .finally(() => setLoading(false))
     }
     getData()
-  }, [uid])
+  }, [uid, day])
   return { data, loading }
 }

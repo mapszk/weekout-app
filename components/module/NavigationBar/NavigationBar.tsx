@@ -5,12 +5,15 @@ import theme from "../../../theme/theme"
 import LogoutModal from "../LogoutModal/LogoutModal"
 import Button from "../../common/Button"
 import Timer from "../Timer/Timer"
+import { useHistory } from "react-router-native"
 
 interface Props {
+  day: string
   style?: any
 }
 
-const NavigationBar: React.FC<Props> = ({ style }) => {
+const NavigationBar: React.FC<Props> = ({ style, day }) => {
+  const history = useHistory()
   const [timerVisible, setTimerVisible] = useState<boolean>(false)
   const [modalVisible, setModalVisible] = useState<boolean>(false)
   return (
@@ -31,7 +34,7 @@ const NavigationBar: React.FC<Props> = ({ style }) => {
             color={theme.colors.primary[500]}
           />
         </Button>
-        <Button icon>
+        <Button onPress={() => history.push(`/edit/${day}`)} icon>
           <MaterialIcons
             name="edit"
             size={30}

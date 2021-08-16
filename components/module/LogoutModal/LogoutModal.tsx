@@ -7,11 +7,12 @@ import Button from "../../common/Button"
 import StyledText from "../../common/StyledText"
 
 interface Props {
+  edit?: boolean
   visible: boolean
   setVisible: (value: boolean) => void
 }
 
-const LogoutModal: React.FC<Props> = ({ visible, setVisible }) => {
+const LogoutModal: React.FC<Props> = ({ visible, edit, setVisible }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
   const history = useHistory()
   const handleLogOut = async () => {
@@ -43,7 +44,8 @@ const LogoutModal: React.FC<Props> = ({ visible, setVisible }) => {
               isLoading={isSubmitting}
               style={{ flex: 1, marginRight: 5 }}
               onPress={() => setVisible(false)}
-              ghostPrimary
+              ghostPrimary={!edit}
+              ghostSecondary={edit}
             >
               Cancel
             </Button>
@@ -51,7 +53,8 @@ const LogoutModal: React.FC<Props> = ({ visible, setVisible }) => {
               isLoading={isSubmitting}
               onPress={handleLogOut}
               style={{ flex: 1 }}
-              primary
+              primary={!edit}
+              secondary={edit}
             >
               Log out
             </Button>
@@ -74,7 +77,7 @@ const customStyles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 25 },
     shadowOpacity: 0.25,
-    elevation: 15,
+    elevation: 5,
     marginHorizontal: 20,
   },
   buttonContainer: {
