@@ -10,6 +10,7 @@ import NavigationBar from "../components/module/NavigationBar/NavigationBar"
 import DayHeader from "../components/module/DayHeader/DayHeader"
 import { DayData } from "../types/DayData"
 import theme from "../theme/theme"
+import RestDay from "../components/module/RestDay/RestDay"
 
 interface ParamsTypes {
   day: string
@@ -33,6 +34,8 @@ const Day: React.FC = () => {
         <View style={customStyles.loader}>
           <ActivityIndicator color={theme.colors.primary[500]} size="large" />
         </View>
+      ) : data?.restDay ? (
+        <RestDay style={{ flex: 10 }} />
       ) : (
         <ExerciseTable
           style={{ flex: 10 }}

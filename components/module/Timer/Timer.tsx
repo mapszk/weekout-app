@@ -8,6 +8,7 @@ import StyledText from "../../common/StyledText"
 import CustomModal from "../../common/CustomModal"
 import NumericInput from "react-native-numeric-input"
 import Toast from "react-native-root-toast"
+import { Audio } from "expo-av"
 
 interface Props {
   visible: boolean
@@ -16,6 +17,12 @@ interface Props {
 const Timer: React.FC<Props> = ({ visible }) => {
   const [settingsVisible, setSettingsVisible] = useState<boolean>(false)
   const slideAnim = useRef(new Animated.Value(300)).current
+  const playSound = async () => {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../../assets/alarm.mp3")
+    )
+    await sound.playAsync()
+  }
   useEffect(() => {
     if (visible) {
       Animated.timing(slideAnim, {
@@ -77,11 +84,11 @@ const Timer: React.FC<Props> = ({ visible }) => {
   useEffect(() => {
     let interval: any
     if (isActive) {
-      interval = setInterval(() => {
+      interval = setInterval(async () => {
         if (seconds === 0 && minutes === 0) {
           clearInterval(interval)
           setIsActive(false)
-          // alarmRef.current.play()
+          await playSound()
           const getTimerData = async () => {
             try {
               const minutes = await AsyncStorage.getItem("minutes")
