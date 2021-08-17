@@ -10,34 +10,13 @@ import { DayData } from "../types/DayData"
 import { useGetDay } from "../hooks/useGetDay"
 import { useAuthContext } from "../hooks/useAuthContext"
 import ExerciseTableEdit from "../components/module/ExerciseTableEdit/ExerciseTableEdit"
-import { firebaseDb } from "../firebase/firebase"
 
 const DayEdit: React.FC = () => {
   const [activeVolume, setActiveVolume] = useState("NONE")
   const { user } = useAuthContext()
   const { day } = useParams<{ day: string }>()
   const { data, loading } = useGetDay(user.uid, day)
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
-  const handleSaveDay = async (dayData: DayData) => {
-    return await firebaseDb
-      .collection("users")
-      .doc(user.uid)
-      .update({ [day as string]: dayData })
-      .then(() => {
-        setIsSubmitting(false)
-        return {
-          msg: "Day saved!",
-          status: "success",
-        }
-      })
-      .catch((err) => {
-        setIsSubmitting(false)
-        return {
-          msg: err.message,
-          status: "error",
-        }
-      })
-  }
+
   return (
     <View style={customStyles.container}>
       <DayHeader day={day} edit />

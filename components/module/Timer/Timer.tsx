@@ -15,18 +15,18 @@ interface Props {
 
 const Timer: React.FC<Props> = ({ visible }) => {
   const [settingsVisible, setSettingsVisible] = useState<boolean>(false)
-  const slideAnim = useRef(new Animated.Value(0)).current
+  const slideAnim = useRef(new Animated.Value(300)).current
   useEffect(() => {
     if (visible) {
       Animated.timing(slideAnim, {
-        toValue: 300,
+        toValue: 0,
         duration: 500,
         easing: Easing.inOut(Easing.ease),
         useNativeDriver: true,
       }).start()
     } else {
       Animated.timing(slideAnim, {
-        toValue: 0,
+        toValue: 300,
         duration: 500,
         useNativeDriver: true,
       }).start()

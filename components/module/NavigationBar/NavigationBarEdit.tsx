@@ -8,6 +8,7 @@ import { useHistory } from "react-router-native"
 import theme from "../../../theme/theme"
 import CustomModal from "../../common/CustomModal"
 import StyledText from "../../common/StyledText"
+import Timer from "../Timer/Timer"
 
 interface Props {
   day: string
@@ -17,6 +18,7 @@ interface Props {
 const NavigationBarEdit: React.FC<Props> = ({ day, style }) => {
   const history = useHistory()
   const [modalExit, setModalExit] = useState<boolean>(false)
+  const [timerVisible, setTimerVisible] = useState<boolean>(false)
   const [modalVisible, setModalVisible] = useState<boolean>(false)
   return (
     <>
@@ -39,9 +41,9 @@ const NavigationBarEdit: React.FC<Props> = ({ day, style }) => {
                 history.push(`/day/${day}`)
               }}
               secondary
-              style={{ flex: 2 }}
+              style={{ flex: 1 }}
             >
-              Exit without save
+              Exit
             </Button>
           </View>
         </CustomModal>
@@ -53,10 +55,10 @@ const NavigationBarEdit: React.FC<Props> = ({ day, style }) => {
             color={theme.colors.secondary[500]}
           />
         </Button>
-        <Button icon>
+        <Button icon onPress={() => setTimerVisible(!timerVisible)}>
           <MaterialIcons
-            name="add"
-            size={40}
+            name="timer"
+            size={30}
             color={theme.colors.secondary[500]}
           />
         </Button>
@@ -68,6 +70,7 @@ const NavigationBarEdit: React.FC<Props> = ({ day, style }) => {
           />
         </Button>
       </View>
+      <Timer visible={timerVisible} />
     </>
   )
 }
