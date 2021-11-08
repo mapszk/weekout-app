@@ -55,7 +55,7 @@ const Timer: React.FC<Props> = ({ visible }) => {
       setSettingsVisible(false)
     } catch (err) {
       // eslint-disable-next-line no-unused-vars
-      const toast = Toast.show(err, {
+      const toast = Toast.show(err as any, {
         duration: Toast.durations.LONG,
         backgroundColor: "red",
         position: Toast.positions.TOP + 25,
